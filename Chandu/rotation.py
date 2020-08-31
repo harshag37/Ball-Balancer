@@ -1,7 +1,7 @@
 import pygame,sys
 def rotate(surface,angle):
 	rotated_surface=pygame.transform.rotate(surface,angle)
-	rotated_rect=rotated_surface.get_rect(center=(250,250))
+	rotated_rect=rotated_surface.get_rect(center=(512,288))
 	return rotated_surface,rotated_rect
 pygame.init()
 screen=pygame.display.set_mode((1024,576))
