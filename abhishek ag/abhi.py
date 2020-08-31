@@ -14,7 +14,6 @@ pl_surface=pygame.image.load(r'G:\plank2.png').convert_alpha()
 pl_surface=pygame.transform.scale2x(pl_surface)
 
 pl_rect=pl_surface.get_rect(center=(750,450))
-ball_surface=pygame.image.load(r'G:\ball.png').convert_alpha()
 angle=0
 p=0
 while True:	
