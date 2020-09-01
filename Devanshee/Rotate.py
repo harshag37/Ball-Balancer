@@ -17,7 +17,7 @@ while True:
 	screen.fill((0,0,235))
 	angle += 1
 	slide_r = pygame.transform.rotate(slide,angle)
-	slide_rect = slide.get_rect(center = (200,350))
+	slide_rect = slide_r.get_rect(center = (200,350))
 	screen.blit(slide_r,slide_rect)	
 
 	pygame.display.update()
