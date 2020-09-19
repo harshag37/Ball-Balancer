@@ -22,8 +22,8 @@ def create_ball(space):
     body=pm.Body(body_type=pm.Body.DYNAMIC)
     body.position=(b_x,b_y)
     shape=pm.Circle(body,25)
-    shape.elasticity = 0.8
-    shape.friction=0.5
+    shape.elasticity = 0.9
+    shape.friction=0.8
     shape.density=1
     space.add(body,shape)
     return body
@@ -35,7 +35,7 @@ def create_ledge(space):
     #joint_motor.max_bias = 2000
     joint.collide_bodies = True
     shape.elasticity = 0.9
-    shape.friction=0.5
+    shape.friction=0.8
     shape.density=0.5
     space.add(body,shape,joint)
     return body
@@ -47,19 +47,11 @@ def motor(space):
     space.add(joint_motor,joint)
     
     return(joint_motor)
-red=(255,0,0)
-green=(0,255,0)
-blue=(0,0,255)
-white=(255,255,255)
-black=(0,0,0)
+
 window=py.display.set_mode((900,500),0,32)
 draw_options = pm.pygame_util.DrawOptions(window)
 py.display.set_caption("Ball Balancing")
 py.display.update()
-quit_game=False
-b_x=680
-b_y=400
-fps=60
 space=pm.Space()
 space.gravity=(0,-500)
 clock=py.time.Clock()
@@ -67,12 +59,20 @@ ball_body=create_ball(space)
 ledge_body=(create_ledge(space))
 joint_motor=motor(space)
 borders(space)
+red=(255,0,0)
+green=(0,255,0)
+blue=(0,0,255)
+white=(255,255,255)
+black=(0,0,0)
+quit_game=False
+b_x=500
+b_y=400
+fps=60
 error=0
 prev_error=0
-
-kp=0.60
-ki=0.10
-kd=60
+kp=0.55
+ki=0.05
+kd=65
 
 while not quit_game:
     for event in py.event.get():
@@ -89,7 +89,7 @@ while not quit_game:
     clock.tick(fps)
     x=ball_body.position
 
-    error= ((400-x[0])/500)+(-1*ball_body.velocity[0]/100)
+    error= ((400-x[0])/350)+(-1*ball_body.velocity[0]/100)
     total_error=kp*error+kd*(error-prev_error)+ki*(error+prev_error)
     rot_speed =total_error
     prev_error=error
@@ -101,3 +101,5 @@ while not quit_game:
     space.add(joint_motor)
     # print((ledge_body.angle)*180/3.14)
     py.display.update()
+py.quit()
+quit()
